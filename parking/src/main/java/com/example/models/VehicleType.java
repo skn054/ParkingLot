@@ -1,6 +1,6 @@
 package com.example.models;
 
-public enum SlotType {
+public class VehicleType {
     LARGE,
     SMALL,
     MEDIUM

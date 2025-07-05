@@ -1,18 +1,19 @@
 package com.example.controller;
 
 import com.example.models.Slot;
+import com.example.models.SlotStatus;
+import com.example.models.SlotType;
 import com.example.models.VehicleType;
+import com.example.repository.SlotRespository;
 
 public class SlotController {
 
-    public boolean searchForASlot(VehicleType vehicleType){
-
+    public static Slot searchForASlot(VehicleType vehicleType){
+            return SlotRespository.getEmptySlot(vehicleType);
     }
 
-     public void AllocateSlot(VehicleType vehicleType,Slot slot){
-
-    }
-    public void freeTheSlot(Slot slot){
-
+    
+    public static void freeTheSlot(Slot slot){
+        SlotRespository.freeSlot(slot);
     }
 }

@@ -1,4 +1,6 @@
-package com.example.models;
+package com.example.strategies;
+
+import com.example.models.Ticket;
 
 public class UPIPaymentProcessor implements PaymentProcessor{
 
