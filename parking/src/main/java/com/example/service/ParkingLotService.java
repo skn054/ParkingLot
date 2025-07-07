@@ -30,7 +30,7 @@ public class ParkingLotService {
         Ticket ticket= ticketService.generateTicket(reservedSlot, vehicle.getLicensePlate());
         
         
-        vehicle.setSlotId(reservedSlot.getSlotId());
+        vehicle.setSlot(reservedSlot);
         vehicleService.saveVehicle(vehicle); 
         
         return ticket;
@@ -39,12 +39,12 @@ public class ParkingLotService {
     public void UnparkVehicle(String vehicleNumber) {
         
             Vehicle vehicle = vehicleService.getVehicleByNumber(vehicleNumber);
-            if(vehicle!=null && vehicle.getSlotId()!=null){
-                slotService.freeTheSlot(vehicle.getSlotId());
+            if(vehicle!=null && vehicle.getSlot().getSlotId()!=null){
+                slotService.freeTheSlot(vehicle.getSlot().getSlotId());
 
                 /*** get price of ticket and pay for ticket */
                 /** if payment successful update ticket status to exit */
-                vehicle.setSlotId(null);
+                vehicle.setSlot(null);
                 vehicleService.saveVehicle(vehicle);
             }
             
