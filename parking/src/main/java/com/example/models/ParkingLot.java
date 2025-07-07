@@ -24,6 +24,9 @@ public class ParkingLot {
     }
 
     public void UnparkVehicle(String vehicleNumber){
+        Ticket ticket= TicketController.getTicketByForVehicle(vehicleNumber);
+        SlotController.unParkSlotByVehicleNumber(ticket.getSlotId());
+
 
     }
 
