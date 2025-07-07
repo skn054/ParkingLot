@@ -24,7 +24,7 @@ public class ParkingLotService {
 
     public Ticket parkVehicle(Vehicle vehicle) throws SlotNotFoundException {
         
-        Slot reservedSlot = slotService.searchForASlot(vehicle);
+        Slot reservedSlot = slotService.findAndReserveSlot(vehicle);
         
         
         Ticket ticket= ticketService.generateTicket(reservedSlot, vehicle.getLicensePlate());

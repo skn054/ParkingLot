@@ -28,7 +28,7 @@ public class SlotService {
         this.slotRepository = slotRepository;
         
     }
-    public Slot searchForASlot(Vehicle vehicle){
+    public Slot findAndReserveSlot(Vehicle vehicle) throws SlotNotFoundException{
         VehicleType vehicleType = vehicle.getType();
         SlotType slotType = getRequiredSlotTypeForVehicleType(vehicleType);
         Optional<Slot> slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(slotType, SlotStatus.AVAILABLE);
@@ -39,10 +39,9 @@ public class SlotService {
                 slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(SlotType.LARGE, SlotStatus.AVAILABLE);
                 
              }else if(slotType == SlotType.SMALL){
-                slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(SlotType.MEDIUM, SlotStatus.AVAILABLE).or(()->{
-                    return slotRepository.findFirstBySlotTypeAndSlotStatus(SlotType.LARGE, SlotStatus.AVAILABLE);
+                slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(SlotType.MEDIUM, SlotStatus.AVAILABLE).or(()->  slotRepository.findFirstBySlotTypeAndSlotStatus(SlotType.LARGE, SlotStatus.AVAILABLE)
 
-                });
+                );
              }
 
              

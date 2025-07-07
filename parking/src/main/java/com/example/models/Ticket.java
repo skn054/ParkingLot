@@ -23,12 +23,12 @@ public class Ticket {
     private TicketStatus status;
 
 
-    public long getEntryTime(Ticket ticket){
-        Duration duration = Duration.between(entryTime,exitTime);
-        long hours = duration.toHours();
-        return hours;
+    // public long getEntryTime(Ticket ticket){
+    //     Duration duration = Duration.between(entryTime,exitTime);
+    //     long hours = duration.toHours();
+    //     return hours;
 
-    }
+    // }
 
     
 
