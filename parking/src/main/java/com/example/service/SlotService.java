@@ -13,7 +13,10 @@ import com.example.repository.SlotRepository;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class SlotService {
 
     /** search in repository if a slot is available of vehicelType provided */
@@ -28,7 +31,7 @@ public class SlotService {
     public Slot searchForASlot(Vehicle vehicle){
         VehicleType vehicleType = vehicle.getType();
         SlotType slotType = getRequiredSlotTypeForVehicleType(vehicleType);
-        Optional<Slot> slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(slotType, SlotStatus.EMPTY);
+        Optional<Slot> slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(slotType, SlotStatus.AVAILABLE);
         if(!slotOpt.isPresent()){
             /// search for a slot with bigger size.
              // get next bigger slot and serach if slot is present. If it is the biggest slot return null.
@@ -36,8 +39,8 @@ public class SlotService {
                 slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(SlotType.LARGE, SlotStatus.AVAILABLE);
                 
              }else if(slotType == SlotType.SMALL){
-                slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(slotType.MEDIUM, SlotStatus.AVAILABLE).or(()->{
-                    slotRepository.findFirstBySlotTypeAndSlotStatus(slotType.LARGE, SlotStatus.AVAILABLE);
+                slotOpt = slotRepository.findFirstBySlotTypeAndSlotStatus(SlotType.MEDIUM, SlotStatus.AVAILABLE).or(()->{
+                    return slotRepository.findFirstBySlotTypeAndSlotStatus(SlotType.LARGE, SlotStatus.AVAILABLE);
 
                 });
              }
@@ -51,6 +54,8 @@ public class SlotService {
 
         }
         Slot slot = slotOpt.get();
+        slot.setVehicle(vehicle);
+        slotRepository.save(slot);
         return slot;
         
     }
@@ -77,6 +82,8 @@ public class SlotService {
             if(slot.isPresent()){
                 Slot slt = slot.get();
                 slt.setSlotStatus(SlotStatus.AVAILABLE);
+                slt.setVehicle(null);
+                slotRepository.save(slt);
             }
     }
 

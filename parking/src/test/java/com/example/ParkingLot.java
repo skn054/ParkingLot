@@ -1,17 +1,21 @@
-package com.example.models;
+package com.example;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
 
 import com.example.controller.ParkingController;
-import com.example.controller.SlotController;
-import com.example.controller.SlotNotFoundException;
-import com.example.controller.TicketController;
-import com.example.service.VehicleService;
 
-@Component
+import com.example.controller.SlotNotFoundException;
+import com.example.models.Building;
+import com.example.models.Entry;
+import com.example.models.Exit;
+import com.example.models.Ticket;
+import com.example.models.Vehicle;
+
+
+
 public class ParkingLot {
     private Building building;
     private List<Entry> entries;
@@ -20,7 +24,7 @@ public class ParkingLot {
     @Autowired
     private ParkingController parkingController;
 
-    public Ticket parkVehicle(Vehicle vehicle){
+    public Ticket parkVehicle(Vehicle vehicle) throws SlotNotFoundException{
         return parkingController.parkVehicle(vehicle);
          
     }

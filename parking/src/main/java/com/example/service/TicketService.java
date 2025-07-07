@@ -2,11 +2,14 @@ package com.example.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Service;
+
 import com.example.models.Slot;
 import com.example.models.Ticket;
 import com.example.models.TicketStatus;
 import com.example.repository.TicketRepository;
 
+@Service
 public class TicketService {
     
     private TicketRepository ticketRepository;
