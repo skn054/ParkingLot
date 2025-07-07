@@ -1,6 +1,6 @@
 package com.example.models;
 
-public class VehicleType {
+public enum VehicleType {
     LARGE,
     SMALL,
     MEDIUM
