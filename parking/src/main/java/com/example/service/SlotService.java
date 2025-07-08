@@ -47,7 +47,7 @@ public class SlotService {
              
             
         }
-        // generate a ticket with slot and return it
+        
         if(!slotOpt.isPresent()){
                 throw new SlotNotFoundException("No suitable spot found for vehicle type: " + vehicleType);
 
@@ -73,9 +73,7 @@ public class SlotService {
         }
     }
 
-    public void fillTheSlot(SlotType vehicleType, Slot slot){
-
-    }
+    
     public void freeTheSlot(String slotId){
             Optional<Slot> slot =  slotRepository.findById(slotId);
             if(slot.isPresent()){

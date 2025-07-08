@@ -1,6 +1,7 @@
 package com.example.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,14 @@ public class TicketService {
         ticketRepository.save(ticket);
         return ticket;
 
+    }
+
+    public Optional<Ticket> getActiveTicketForLicensePlate(String licensePlate){
+            return ticketRepository.findByLicensePlateAndStatus(licensePlate,TicketStatus.ACTIVE);
+
+    }
+
+    public void save(Ticket ticket){
+        ticketRepository.save(ticket);
     }
 }

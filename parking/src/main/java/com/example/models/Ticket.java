@@ -3,13 +3,16 @@ package com.example.models;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 public class Ticket {
 
     @Id
@@ -22,13 +25,12 @@ public class Ticket {
     private double amountPaid;
     private TicketStatus status;
 
+    @OneToOne(mappedBy = "ticket")
+    private PaymentInvoice paymentInvoice;
 
-    // public long getEntryTime(Ticket ticket){
-    //     Duration duration = Duration.between(entryTime,exitTime);
-    //     long hours = duration.toHours();
-    //     return hours;
 
-    // }
+
+    
 
     
 

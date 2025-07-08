@@ -1,7 +1,9 @@
 package com.example.strategies;
 
+import com.example.models.Ticket;
+
 public interface PricingStrategy {
 
-    public void calculatePrice(Ticket ticket);
+    public double calculatePrice(Ticket ticket);
 
 }
